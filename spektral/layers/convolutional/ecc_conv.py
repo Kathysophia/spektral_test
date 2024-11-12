@@ -179,7 +179,8 @@ class ECCConv(Conv):
             output += K.dot(x, self.root_kernel)
         if self.use_bias:
             output = K.bias_add(output, self.bias)
-        if mask is not None:
+        # if mask is not None:
+        if mask is not None and isinstance(mask, list) and len(mask) > 0 and isinstance(mask[0], tf.Tensor):
             output *= mask[0]
         output = self.activation(output)
 
